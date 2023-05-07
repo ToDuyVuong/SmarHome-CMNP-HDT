@@ -17,7 +17,6 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderItemId;
 
-
     @Column(name = "quantity")
     private int quantity;
 
