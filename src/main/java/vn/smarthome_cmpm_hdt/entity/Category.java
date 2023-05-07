@@ -1,4 +1,4 @@
-package vn.iotstar.smarhomecmnphdt.entity;
+package vn.smarthome_cmpm_hdt.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package vn.iotstar.smarhomecmnphdt.entity;
+package vn.smarthome_cmpm_hdt.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

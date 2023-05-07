@@ -8,7 +8,7 @@
         <version>2.7.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>vn.iotstar</groupId>
+    <groupId>vn</groupId>
     <artifactId>SmarHome-CMNP-HDT</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>

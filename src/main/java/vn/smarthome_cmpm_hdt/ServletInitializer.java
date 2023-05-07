@@ -1,4 +1,4 @@
-package vn.iotstar.smarhomecmnphdt;
+package vn.smarthome_cmpm_hdt;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
