@@ -9,11 +9,12 @@ import java.sql.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "customer", uniqueConstraints = {
-    @UniqueConstraint(name = "UQ_Customer_username" ,columnNames = "username"),
-    @UniqueConstraint(name = "UQ_Customer_email" ,columnNames = "email"),
-    @UniqueConstraint(name = "UQ_Customer_phone" ,columnNames = "phone")
-})
+//@Table(name = "customer", uniqueConstraints = {
+//    @UniqueConstraint(name = "UQ_Customer_username" ,columnNames = "username"),
+//    @UniqueConstraint(name = "UQ_Customer_email" ,columnNames = "email"),
+//    @UniqueConstraint(name = "UQ_Customer_phone" ,columnNames = "phone")
+//})
+@Table(name = "customer")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

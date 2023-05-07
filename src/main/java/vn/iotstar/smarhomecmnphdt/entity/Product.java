@@ -35,7 +35,6 @@ public class Product {
     @Column(name = "quantity")
     private int quantity;
 
-
     // relationship with Category
     @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false, foreignKey = @ForeignKey(name = "FK_category_product"))
@@ -45,7 +44,4 @@ public class Product {
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
     private List<OrderItem> orderItems;
 
-    //relationship with Cart
-//    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
-//    private Set<Cart> carts = new HashSet<>();
 }

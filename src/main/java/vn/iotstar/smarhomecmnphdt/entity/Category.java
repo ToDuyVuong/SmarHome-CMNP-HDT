@@ -26,6 +26,9 @@ public class Category {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "image")
+    private String image;
+
     // relationship with Product
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     @JsonIgnore

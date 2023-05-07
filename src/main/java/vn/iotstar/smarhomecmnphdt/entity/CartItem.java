@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, name = "cartitemid")
+    @Column(nullable = false, name = "cartitem_id")
     private Integer cartItemId;
 
     @Column(nullable = true, name = "quantity")

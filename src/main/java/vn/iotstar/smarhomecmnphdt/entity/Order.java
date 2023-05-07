@@ -53,13 +53,10 @@ public class Order {
     @JoinColumn(name = "customerId", referencedColumnName = "customer_id", foreignKey = @ForeignKey(name = "FK_customer_order"))
     private Customer customer;
 
-//    @PrePersist
-//    public void setPurchaseDate() {
-//        this.orderDate = LocalDate.now();
-//    }
+
 
     public enum Status {
-        PENDING(0), DELIVERING(1), DELIVERED(2), CANCELED(3);
+        PENDING(0), PROCESSING(1), DELIVERING(2), DELIVERED(3), CANCELED(4);
 
         private int value;
 

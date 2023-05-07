@@ -8,6 +8,7 @@ public class SmarHomeCmnpHdtApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SmarHomeCmnpHdtApplication.class, args);
+        System.out.println(" 🚀 Server ready at http://localhost:8080");
     }
 
 }

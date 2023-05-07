@@ -23,6 +23,7 @@ public class OrderItem {
 
     @Column(name= "price")
     private Long price;
+
     // relationship with Product
     @ManyToOne(targetEntity = Product.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "productId", referencedColumnName = "product_id", nullable = false, foreignKey = @ForeignKey(name = "FK_product_orderItem"))
