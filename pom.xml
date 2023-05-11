@@ -1,23 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.5</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>vn</groupId>
-    <artifactId>SmarHome-CMNP-HDT</artifactId>
+    <artifactId>SmartHome-CNPM-HDT</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
-    <name>SmarHome-CMNP-HDT</name>
-    <description>SmarHome-CMNP-HDT</description>
+<!--    <packaging>war</packaging>-->
+    <name>SmartHome-CNPM-HDT</name>
+    <description>SmartHome-CNPM-HDT</description>
     <properties>
         <java.version>17</java.version>
     </properties>
     <dependencies>
+
+
+
+        <!-- Thymeleaf dependency -->
+        <!--		<dependency>-->
+        <!--			<groupId>org.springframework.boot</groupId>-->
+        <!--			<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
+        <!--		</dependency>-->
+
+
+
+
 
         <!-- JSP dependency -->
         <dependency>
