@@ -16,7 +16,6 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, name = "order_id")
-
     private Integer orderId;
 
     @Column(name = "order_date")
@@ -44,14 +43,16 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    // relationship with OrderItem
-    @OneToMany(targetEntity = OrderItem.class, fetch = FetchType.LAZY, mappedBy = "order")
-    private List<OrderItem> orderItems;
+//    // relationship with OrderItem
+//    @OneToMany(targetEntity = OrderItem.class, fetch = FetchType.LAZY, mappedBy = "order")
+//    private List<OrderItem> orderItems;
 
     // relationship with Customer
     @ManyToOne(targetEntity = Customer.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "customerId", referencedColumnName = "customer_id", foreignKey = @ForeignKey(name = "FK_customer_order"))
     private Customer customer;
+
+
 
 
 

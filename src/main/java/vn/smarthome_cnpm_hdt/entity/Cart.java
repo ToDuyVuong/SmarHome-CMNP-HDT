@@ -13,7 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cart {
-
     // Id cart = Id customer
     @Id
     @Column(nullable = false, name = "cart_id")
@@ -25,10 +24,12 @@ public class Cart {
     @Column(nullable = false, name = "totalprice")
     private int totalPrice;
 
-    @OneToMany(mappedBy = "cart", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<CartItem> cartitems;
+//    @OneToMany(mappedBy = "cart", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<CartItem> cartitems;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
+
 }

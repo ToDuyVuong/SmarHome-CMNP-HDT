@@ -149,13 +149,13 @@
 
 
 
-                                <script>
-                                    var text = document.getElementById("description-${item.products.productId}").innerHTML;
-                                    var maxLength = 250;
-                                    var trimmedString = text.substr(0, maxLength);
-                                    trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
-                                    document.getElementById("description-${item.products.productId}").innerHTML = trimmedString + "...";
-                                </script>
+<%--                                <script>--%>
+<%--                                    var text = document.getElementById("description-${item.products.productId}").innerHTML;--%>
+<%--                                    var maxLength = 250;--%>
+<%--                                    var trimmedString = text.substr(0, maxLength);--%>
+<%--                                    trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))--%>
+<%--                                    document.getElementById("description-${item.products.productId}").innerHTML = trimmedString + "...";--%>
+<%--                                </script>--%>
                             </c:forEach>
 
                             </tbody>

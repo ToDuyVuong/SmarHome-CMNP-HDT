@@ -1,6 +1,6 @@
-package vn.smarthome_cnpm_hdt.shippingstrategy;
+package vn.smarthome_cnpm_hdt.shipping;
 
-public class GiaoHangCoBanShipping implements IShipping{
+public class GiaoHangCoBan implements IShipping{
     @Override
     public long calculateShippingCost(long total) {
         if (total >= 300000) {

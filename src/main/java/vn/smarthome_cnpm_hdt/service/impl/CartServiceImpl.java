@@ -27,17 +27,17 @@ public class CartServiceImpl implements ICartService{
         cartRepository.save(cart);
     }
 
-    @Override
-    public Long getCartTotal(Cart cartEntity) {
-        Long cartTotal = 0L;
-        List<CartItem> cartItems = (List<CartItem>) cartEntity.getCartitems();
-        for (CartItem cartItem : cartItems) {
-            Long price = cartItem.getProducts().getPrice();
-            Long quantity = Long.valueOf(cartItem.getQuantity());
-            cartTotal += price * quantity;
-        }
-        return cartTotal;
-    }
+//    @Override
+//    public Long getCartTotal(Cart cartEntity) {
+//        Long cartTotal = 0L;
+//        List<CartItem> cartItems = (List<CartItem>) cartEntity.getCartitems();
+//        for (CartItem cartItem : cartItems) {
+//            Long price = cartItem.getProducts().getPrice();
+//            Long quantity = Long.valueOf(cartItem.getQuantity());
+//            cartTotal += price * quantity;
+//        }
+//        return cartTotal;
+//    }
 
     @Override
     public <S extends Cart> S save(S entity) {

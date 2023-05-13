@@ -59,7 +59,7 @@ checkout.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
                                                      height="150">
                                             </div>
                                             <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                <p class="text-muted mb-0"  title="${product.name}">${item.product.name.substring(0, 40)}</p>
+                                                <p class="text-muted mb-0"  title="${product.name}">${item.product.name}</p>
                                             </div>
 
 

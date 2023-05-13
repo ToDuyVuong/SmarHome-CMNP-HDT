@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, name = "cartitem_id")
+    @Column(nullable = false, name = "cartitemid")
     private Integer cartItemId;
 
     @Column(nullable = true, name = "quantity")
@@ -28,4 +28,6 @@ public class CartItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cartid")
     private Cart cart;
+
+
 }

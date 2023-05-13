@@ -48,11 +48,14 @@ public class Customer {
     @Column(name = "password")
     private String password;
 
-    // relationship with Order
-    @OneToMany(targetEntity = Order.class, mappedBy = "customer")
-    private List<Order> orders;
+//    // relationship with Order
+//    @OneToMany(targetEntity = Order.class, mappedBy = "customer")
+//    private List<Order> orders;
 
-    // relationship 1-1 with Cart
-    @OneToOne(targetEntity = Cart.class, mappedBy = "customer")
-    private Cart cart;
+//    // relationship 1-1 with Cart
+//    @OneToOne(targetEntity = Cart.class, mappedBy = "customer")
+//    private Cart cart;
+
+
+
 }

@@ -1,5 +1,7 @@
 package vn.smarthome_cnpm_hdt.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +19,6 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, name = "product_id")
-
     private Integer productId;
 
     @Column(name = "name")
@@ -38,10 +39,13 @@ public class Product {
     // relationship with Category
     @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false, foreignKey = @ForeignKey(name = "FK_category_product"))
+    @JsonIgnore
     private Category category;
 
-    // relationship with OrderItem
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private List<OrderItem> orderItems;
+//    // relationship with OrderItem
+//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+//    private List<OrderItem> orderItems;
+
+
 
 }

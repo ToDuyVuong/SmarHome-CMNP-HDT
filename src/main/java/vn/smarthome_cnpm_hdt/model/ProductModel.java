@@ -19,6 +19,6 @@ public class ProductModel {
     private String image;
     private Long price;
     private int quantity;
-    private CategoryModel category;
+    private Category category;
     private List<OrderItem> orderItems;
 }

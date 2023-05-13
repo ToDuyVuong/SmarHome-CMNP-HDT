@@ -23,8 +23,8 @@ public class OrderModel {
     private String phone;
     private Integer totalQuantity;
     private Status status;
-    private List<OrderItemModel> orderItems;
-    private CustomerModel customer;
+    private List<OrderItem> orderItems;
+    private Customer customer;
 
     public enum Status {
         PENDING(0), PROCESSING(1), DELIVERING(2), DELIVERED(3), CANCELED(4);

@@ -13,10 +13,10 @@ import vn.smarthome_cnpm_hdt.model.CartItemModel;
 import vn.smarthome_cnpm_hdt.model.CartModel;
 import vn.smarthome_cnpm_hdt.model.CustomerModel;
 import vn.smarthome_cnpm_hdt.service.*;
-import vn.smarthome_cnpm_hdt.shippingstrategy.GiaoHangCoBanShipping;
-import vn.smarthome_cnpm_hdt.shippingstrategy.GiaoHangHoaTocShipping;
-import vn.smarthome_cnpm_hdt.shippingstrategy.GiaoHangNhanhShipping;
-import vn.smarthome_cnpm_hdt.shippingstrategy.IShipping;
+import vn.smarthome_cnpm_hdt.shipping.GiaoHangCoBan;
+import vn.smarthome_cnpm_hdt.shipping.GiaoHangHoaToc;
+import vn.smarthome_cnpm_hdt.shipping.GiaoHangNhanh;
+import vn.smarthome_cnpm_hdt.shipping.IShipping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -121,13 +121,13 @@ public class OrderController {
         IShipping shippingStrategy;
         switch (shippingMethod) {
             case "fast":
-                shippingStrategy = new GiaoHangNhanhShipping();
+                shippingStrategy = new GiaoHangNhanh();
                 break;
             case "express":
-                shippingStrategy = new GiaoHangHoaTocShipping();
+                shippingStrategy = new GiaoHangHoaToc();
                 break;
             default:
-                shippingStrategy = new GiaoHangCoBanShipping();
+                shippingStrategy = new GiaoHangCoBan();
                 break;
         }
 

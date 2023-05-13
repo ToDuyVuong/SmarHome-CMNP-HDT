@@ -8,7 +8,7 @@ public interface ICartService {
 
     void createCart(Cart cart);
 
-    public Long getCartTotal(Cart cartEntity);
+//    public Long getCartTotal(Cart cartEntity);
     void deleteAll();
 
     void deleteById(Integer cartId);

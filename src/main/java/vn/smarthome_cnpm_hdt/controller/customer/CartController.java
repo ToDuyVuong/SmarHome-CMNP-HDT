@@ -33,7 +33,7 @@ import java.util.Optional;
 @Controller
 @RequestMapping("cart")
 public class CartController {
-   @Autowired
+    @Autowired
     IProductService productService;
     @Autowired
     ICustomerService customerService;
@@ -46,40 +46,46 @@ public class CartController {
     @GetMapping("")
     public ModelAndView viewCart(ModelMap model, HttpServletRequest request) {
 
-       try {
-           HttpSession session = request.getSession();
-           Integer id = (Integer) session.getAttribute("id");
-           if (id == null) {
-               // Nếu chưa đăng nhập thì chuyển hướng đến trang đăng nhập
-               return new ModelAndView("redirect:/login");
-           }
+        try {
+            HttpSession session = request.getSession();
+            Integer id = (Integer) session.getAttribute("id");
+            if (id == null) {
+                // Nếu chưa đăng nhập thì chuyển hướng đến trang đăng nhập
+                return new ModelAndView("redirect:/login");
+            }
 
-           List<CartItem> cartItemEntities = cartItemService.getCartItemsByCartId(id);
-           Optional<Cart> opt = cartService.findById(id);
+            List<CartItem> cartItemEntities = cartItemService.getCartItemsByCartId(id);
+            Optional<Cart> opt = cartService.findById(id);
 
-           if (opt.isPresent()) {
-               CartModel cart = new CartModel();
-               BeanUtils.copyProperties(opt.get(), cart);
-               model.addAttribute("cart", cart);
-           } else {
-               return new ModelAndView("customer/cart", model);
-           }
-           if (cartItemEntities != null) {
-               List<CartItemModel> cartItemModels = new ArrayList<>();
-               for (CartItem cartItemEntity : cartItemEntities) {
-                   CartItemModel cartItem = new CartItemModel();
-                   BeanUtils.copyProperties(cartItemEntity, cartItem);
-                   cartItemModels.add(cartItem);
-               }
-               model.addAttribute("cartItems", cartItemModels);
-           }
-           return new ModelAndView("customer/cart", model);
-       }
-       catch (Exception e) {
-           e.printStackTrace();
-           return new ModelAndView("customer/cart", model);
+            if (opt.isPresent()) {
+                CartModel cart = new CartModel();
+                BeanUtils.copyProperties(opt.get(), cart);
+                model.addAttribute("cart", cart);
 
-       }
+
+
+                System.out.println("cart: " + cart.getCartitems());
+                System.out.println("cart: " + cart.getCartId());
+                System.out.println("cart: " + cart.getCustomer());
+            } else {
+                return new ModelAndView("customer/cart", model);
+            }
+            if (cartItemEntities != null) {
+                List<CartItemModel> cartItemModels = new ArrayList<>();
+                for (CartItem cartItemEntity : cartItemEntities) {
+                    CartItemModel cartItem = new CartItemModel();
+                    BeanUtils.copyProperties(cartItemEntity, cartItem);
+                    cartItemModels.add(cartItem);
+                    System.out.println("cartItemModels: " + cartItemEntity.getProducts().getImage());
+                }
+                model.addAttribute("cartItems", cartItemModels);
+            }
+            return new ModelAndView("customer/cart", model);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ModelAndView("customer/cart", model);
+
+        }
     }
 
 
@@ -90,26 +96,27 @@ public class CartController {
         // Lấy id cart = id customer
         HttpSession session = request.getSession();
         Integer id = (Integer) session.getAttribute("id");
+        System.out.println("id cart: " + id);
         CartItem cartItemEntity = new CartItem();
         Optional<Cart> opt = cartService.findById(id);
         Optional<Product> optProduct = productService.findById(productId);
 
 
-
-
-
         if (opt.isPresent() || optProduct.isPresent()) {
             Cart cartEntity = opt.get();
             Product productEntity = optProduct.get();
+            System.out.println("id product: " + productEntity.getProductId());
             try {
                 CartItem cartItem = cartItemService.findByCartIdAndProductId(id.intValue(), productEntity.getProductId().intValue());
                 // Đã có sản phẩm trong item
                 if (cartItem != null) {
-                    if(cartItem.getQuantity() >= productEntity.getQuantity()){
+                    if (cartItem.getQuantity() >= productEntity.getQuantity()) {
                         cartItem.setQuantity(productEntity.getQuantity());
+                        System.out.println("Số lượng sản phẩm trong kho không đủ");
                         cartItemService.saveCartItem(cartItemEntity);
-                    }else {
+                    } else {
                         cartItem.setQuantity(cartItem.getQuantity() + 1);
+                        System.out.println("Số lượng sản phẩm trong kho đủ");
                         cartItemService.saveCartItem(cartItemEntity);
                     }
 
@@ -117,8 +124,11 @@ public class CartController {
                 //Chưa có sản phẩm trùng trong item
                 else {
                     cartItemEntity.setCart(cartEntity);
+                    System.out.println("id cart to cartItemEntity: " + cartItemEntity.getCart().getCartId());
                     cartItemEntity.setProducts(productEntity);
+                    System.out.println("id product to cartItemEntity: " + cartItemEntity.getProducts().getProductId());
                     cartItemEntity.setQuantity(1);
+                    System.out.println("sản phẩm trong kho đủ");
                     cartItemService.saveCartItem(cartItemEntity);
                 }
 
@@ -130,6 +140,7 @@ public class CartController {
                 }
                 cartEntity.setTotalPrice(totalPrice);
                 cartService.save(cartEntity);
+                System.out.println("total price: " + totalPrice);
                 model.addAttribute("cart", cartEntity);
             } catch (Exception e) {
             }
@@ -140,7 +151,7 @@ public class CartController {
 
     @RequestMapping("/minus/{productId}")
     public ModelAndView MinusProductToCart(ModelMap model, @PathVariable("productId") Integer productId, @Valid @ModelAttribute("customer") CustomerModel customerModel,
-                                         @Valid @ModelAttribute("products") ProductModel productModel, @Valid @ModelAttribute("cart") CartModel cartModel, HttpServletRequest request, BindingResult result) {
+                                           @Valid @ModelAttribute("products") ProductModel productModel, @Valid @ModelAttribute("cart") CartModel cartModel, HttpServletRequest request, BindingResult result) {
 
         // Lấy id cart = id customer
         HttpSession session = request.getSession();
@@ -155,10 +166,10 @@ public class CartController {
             try {
                 CartItem cartItem = cartItemService.findByCartIdAndProductId(id.intValue(), productEntity.getProductId().intValue());
                 if (cartItem != null) {
-                    if(cartItem.getQuantity() > 1){
+                    if (cartItem.getQuantity() > 1) {
                         cartItem.setQuantity(cartItem.getQuantity() - 1);
                         cartItemService.saveCartItem(cartItemEntity);
-                    }else {
+                    } else {
                         cartItemService.deleteById(cartItem.getCartItemId());
                     }
 
@@ -178,7 +189,6 @@ public class CartController {
         }
         return new ModelAndView("redirect:/cart", model);
     }
-
 
 
     @RequestMapping("/remove/{cartItemId}")
