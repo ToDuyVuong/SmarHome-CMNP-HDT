@@ -4,8 +4,6 @@ package vn.smarthome_cnpm_hdt.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import vn.smarthome_cnpm_hdt.entity.Cart;
-import vn.smarthome_cnpm_hdt.entity.Order;
 
 import java.sql.Date;
 import java.util.List;
@@ -24,8 +22,8 @@ public class CustomerModel {
     private String address;
     private String username;
     private String password;
-    private List<Order> orders;
-    private Cart cart;
+    private List<OrderModel> orders;
+    private CartModel cart;
     private String newpassword;
     private String password2;
 }

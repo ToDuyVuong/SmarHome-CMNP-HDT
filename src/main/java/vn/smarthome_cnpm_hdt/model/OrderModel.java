@@ -22,9 +22,23 @@ public class OrderModel {
     private String address;
     private String phone;
     private Integer totalQuantity;
-    private Order.Status status;
-    private List<OrderItem> orderItems;
-    private Customer customer;
+    private Status status;
+    private List<OrderItemModel> orderItems;
+    private CustomerModel customer;
+
+    public enum Status {
+        PENDING(0), PROCESSING(1), DELIVERING(2), DELIVERED(3), CANCELED(4);
+
+        private int value;
+
+        private Status(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
 
 
 }
