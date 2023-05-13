@@ -29,6 +29,15 @@
 
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+
+    <style>
+        .popover-body {
+            max-width: 200px;
+        }
+    </style>
+
+
 </head>
 
 
@@ -51,17 +60,15 @@
                 </a></li>
                 <li class="nav-item"><a class="nav-link" href="/product">Sản
                     Phẩm</a></li>
-<%--                                <li class="nav-item"><a class="nav-link" href="/login">Đăng--%>
-<%--                                    Nhập</a></li>--%>
 
-                                <c:if test="${not empty sessionScope.id}">
-                                    <li class="nav-item"><a class="nav-link" href="/profile">Xin Chào:
-                                        <c:if test="${not empty sessionScope.id}">
+                <c:if test="${not empty sessionScope.id}">
+                    <li class="nav-item"><a class="nav-link" href="/profile">Xin Chào:
+                        <c:if test="${not empty sessionScope.id}">
 
-                                            <%=session.getAttribute("fullname")%>
-                                        </c:if>
-                                    </a></li>
-                                </c:if>
+                            <%=session.getAttribute("fullname")%>
+                        </c:if>
+                    </a></li>
+                </c:if>
 
 
             </ul>
@@ -80,51 +87,84 @@
             </form>
 
 
+            <div class="btn-group">
+                <button type="button" class="btn btn-sm ml-3" id="dropdownButton">
+                    <i style='font-size:24px' class='far'>&#xf2bd;</i>
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
 
-
-            <div>
-                <a class="btn btn-sm ml-3" <c:if test="${not empty sessionScope.id}">
-                    href="/profile"
-                </c:if>
-                        <c:if test="${ empty sessionScope.id}">
-                            href="/login"
-                        </c:if>><i style='font-size:24px' class='far'>&#xf2bd;</i>
-                </a>
-
-                <a class="btn btn-sm ml-3"
+                    <ul>
                         <c:if test="${not empty sessionScope.id}">
-                            href="/cart"
+                            <li style='font-size:21px'><a href="/profile" style='color: blue;'><i class='far' >&#xf2bd;</i> Cá nhân</a></li>
+                            <li style='font-size:21px'><a href="/cart" style='color: green;'><i class="fa" >&#xf07a;</i> Giỏ hàng</a></li>
+                            <li style='font-size:21px'><a href="/logout" style='color: red;'><i class="fas fa-sign-out-alt" ></i> Đăng xuất</a></li>
                         </c:if>
-                        <c:if test="${ empty sessionScope.id}">
-                            href="/login"
-                        </c:if>> <i
-                        class="fa fa-shopping-cart"></i><!--  Giỏ Hàng <span
-						class="badge badge-light"></span> -->
-                </a>
+                        <c:if test="${empty sessionScope.id}">
+                            <li style='font-size:20px' ><a href="/login"  style='color: orange;'><i class="fas fa-sign-in-alt" ></i> Đăng nhập</a></li>
+                        </c:if>
+                    </ul>
+
+<%--                    <ul>--%>
+<%--                        <c:if test="${not empty sessionScope.id}">--%>
+<%--                            <li  style='font-size:21px'><a href="/profile"><i class='far'>&#xf2bd;</i> Cá nhân</a></li>--%>
+<%--                            <li style='font-size:21px'><a href="/cart"><i class="fa">&#xf07a;</i> Giỏ hàng</a></li>--%>
+<%--                            <li style='font-size:21px'><a href="/logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>--%>
+<%--                        </c:if>--%>
+<%--                        <c:if test="${empty sessionScope.id}">--%>
+<%--                            <li style='font-size:21px'><a href="/login"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>--%>
+<%--                        </c:if>--%>
+<%--                    </ul>--%>
+<%--                    <ul>--%>
+
+
+<%--                        <c:if test="${not empty sessionScope.id}">--%>
+<%--                            <li style='font-size:20px'><a href="/profile">--%>
+<%--                                <i class='far'>&#xf2bd;</i>--%>
+<%--                                Cá nhân</a></li>--%>
+<%--                            <li style='font-size:20px'><a href="/cart">--%>
+<%--                                <i class="fa">&#xf07a;</i>--%>
+<%--                                Giỏ hàng</a></li>--%>
+<%--                            <li style='font-size:20px'><a href="/logout"><i class="fas fa-sign-out-alt"></i>--%>
+<%--                                Đăng xuất</a></li>--%>
+
+<%--                        </c:if>--%>
+<%--                        <c:if test="${empty sessionScope.id}">--%>
+<%--                            <li style='font-size:20px'><a href="/login"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>--%>
+<%--                            </li>--%>
+<%--                        </c:if>--%>
+<%--                    </ul>--%>
+                </div>
             </div>
-
-<%--            <!-- logout -->--%>
-<%--            <c:if test="${not empty sessionScope.id}">--%>
-<%--                <div>--%>
-<%--                    <a class="btn btn-success btn-sm ml-3" href="/logout"--%>
-<%--                       role="button">Logout User <span class="badge badge-light"></span>--%>
-<%--                    </a>--%>
-<%--                </div>--%>
-<%--            </c:if>--%>
-
-
-            <%-- <!-- Session  -->
-            <p>
-
-                <li class="nav-item">Chào mừng
-                <%=session.getAttribute("id")%>
-                đến với trang web của chúng tôi!</li>
-            </p>
---%>
 
 
         </div>
     </div>
 </nav>
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var dropdownButton = $("#dropdownButton");
+        var dropdownMenu = $("#dropdownMenu");
+
+        dropdownButton.mouseenter(function () {
+            dropdownMenu.show();
+        });
+
+        dropdownButton.mouseleave(function () {
+            dropdownMenu.hide();
+        });
+
+        dropdownMenu.mouseenter(function () {
+            dropdownMenu.show();
+        });
+
+        dropdownMenu.mouseleave(function () {
+            dropdownMenu.hide();
+        });
+    });
+</script>
 </body>

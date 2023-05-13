@@ -88,7 +88,8 @@
                                     </div>
                                 </th>
                                 <th class="text-center py-3 px-4" style="width: 180px;">Hình ảnh</th>
-                                <th class="text-center py-3 px-4" style="min-width: 400px;">Tên Sản Phẩm &amp; Mô tả</th>
+                                <th class="text-center py-3 px-4" style="min-width: 400px;">Tên Sản Phẩm &amp; Mô tả
+                                </th>
                                 <th class="text-center py-3 px-4" style="width: 130px;">Số lượng</th>
                                 <th class="text-center text-right py-3 px-4" style="width: 120px;">Đơn Giá</th>
                                 <th class="text-center text-right py-3 px-4" style="width: 120px;">Số Tiền</th>
@@ -110,14 +111,12 @@
                                         <a href="#productdetail">
 
                                             <img src="${item.products.image}"
-                                                 alt="Hình ảnh sản phẩm"title="" width="150"
+                                                 alt="Hình ảnh sản phẩm" title="" width="150"
                                                  height="150">
-<%--                                                                                            <img src="https://www.bootdey.com/image/200x200/"--%>
-<%--                                                                                                 alt="Age Of Wisdom Tan Graphic Tee" title="" width="150"--%>
-<%--                                                                                                 height="150">--%>
+
                                         </a>
                                     </td>
-                                    <td id="description-${item.products.productId}"><b>${item.products.name}</b> <br >
+                                    <td id="description-${item.products.productId}"><b>${item.products.name}</b> <br>
                                         Thông tin sản phẩm: ${item.products.description}</td>
                                     <td>
                                         <div class="quantity d-flex justify-content-center align-items-center text-center">
@@ -140,22 +139,13 @@
 
                                     <td class="text-right">${item.products.price } VNĐ</td>
                                     <td class="text-right">${item.products.price * item.quantity} VNĐ</td>
+
                                     <td class="text-center">
-                                        <a href="/cart/remove/${item.cartItemId}"
-                                           class="shop-tooltip close float-none text-danger " title=""
-                                           data-original-title="Remove">×</a>
+                                        <a href="/cart/remove/${item.cartItemId}" class="shop-tooltip close float-none text-danger" title="Xác nhận xóa"
+                                           onclick="return confirm('Bạn có chắc chắn muốn xóa?')" data-original-title="Remove">×</a>
                                     </td>
                                 </tr>
 
-
-
-<%--                                <script>--%>
-<%--                                    var text = document.getElementById("description-${item.products.productId}").innerHTML;--%>
-<%--                                    var maxLength = 250;--%>
-<%--                                    var trimmedString = text.substr(0, maxLength);--%>
-<%--                                    trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))--%>
-<%--                                    document.getElementById("description-${item.products.productId}").innerHTML = trimmedString + "...";--%>
-<%--                                </script>--%>
                             </c:forEach>
 
                             </tbody>
@@ -182,15 +172,13 @@
                                                     Tổng số sản phẩm
                                                     <span id="sum-item-cart"></span>
                                                 </li>
-<%--                                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">--%>
-<%--                                                    Vận chuyển--%>
-<%--                                                    <span>Miễn phí</span>--%>
-<%--                                                </li>--%>
+
                                                 <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                                                     <div>
                                                         <strong>Tổng đơn</strong>
                                                     </div>
-                                                    <span><strong id="total-price" value="${totalPrice}"></strong></span>
+                                                    <span><strong id="total-price"
+                                                                  value="${totalPrice}"></strong></span>
                                                 </li>
                                             </ul>
                                             <div class="d-flex justify-content-center">
@@ -226,6 +214,7 @@
     let totalSpan = document.querySelector('#total-price');
     let sumItemCart = document.querySelector('#sum-item-cart');
     let selectAllCheckbox = document.getElementById("select-all-products");
+
     // Phần tính toán tổng đơn và tổng số sản phẩm
     function updateTotal() {
         let total = 0;

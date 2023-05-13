@@ -172,11 +172,17 @@
                     </div>
                 </div>
 
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a class="btn btn-danger" href="/logout"
-                       role="button">Đăng xuất <span class="badge badge-light"></span>
-                    </a>
+                <div class="d-grid gap-2 d-md-flex justify-content-between">
+                    <div>
+                        <a class="btn btn-success" href="/cart" role="button"><span class="fa">&#xf07a;</span> Giỏ hàng</a>
+                    </div>
+                    <div>
+                        <a class="btn btn-danger" href="/logout" role="button"><span class="fas fa-sign-out-alt"></span> Đăng xuất </a>
+                    </div>
+
                 </div>
+
+
 
 
 
