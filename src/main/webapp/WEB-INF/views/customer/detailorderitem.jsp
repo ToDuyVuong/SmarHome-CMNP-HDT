@@ -4,7 +4,6 @@ checkout.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%@include file="/common/web/header.jsp" %>
@@ -17,7 +16,6 @@ checkout.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
 </head>
 <body>
 
-<%--<br>--%>
 <br>
 <br><br>
 <br>
@@ -34,7 +32,6 @@ checkout.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
                     <div class="card-body p-4">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <p class="lead fw-normal mb-0" style="color: #a8729a;">Hóa đơn</p>
-                            <%--                            <p class="small text-muted mb-0">Trạng thái đơn hàng: ${order.status}</p>--%>
 
                             <div class="small text-muted mb-0">
                                 <p style="color: #2F2D3B">Trạng thái đơn hàng: ${order.status}</p>
@@ -131,19 +128,59 @@ checkout.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
                          style="background-color: #a8729a; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
                         <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
                             Tổng đơn: <span class="h2 mb-0 ms-2">${order.totalPrice} VNĐ</span></h5>
-                        <%--                       <span>  <b style="color: #2F2D3B">  Tổng đơn:   </b> </span>   ${order.totalPrice} VNĐ</h5>--%>
 
                     </div>
                 </div>
+
+                <div class="card-footer text-center">
+                    <c:if test="${order.status == 'PENDING'}">
+                        <a href="/order/canceled/${order.orderId}">
+                            <button class="btn btn-danger">Hủy đơn hàng</button>
+                        </a>
+                    </c:if>
+                </div>
+
                 <div class="card-footer text-center">
                     <a href="/order/view" class="btn btn-gray" style="color: #2F2D3B">Quay lại danh sách đơn hàng của
                         bạn</a>
                 </div>
             </div>
+
+            <div style="background: #4bb8a9">
+                <!-- Modal xác nhận -->
+                <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmModalLabel">Xác nhận hủy đơn hàng của bạn!</h5>
+                                <button type="button" class="close" onclick="closedForm();" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Bạn có chắc chắn muốn hủy đơn hàng này không?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" onclick="closedForm();">
+                                    Đóng
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="submitForm();" style="font-family: Arial, sans-serif; font-weight: bold; background-color: #c51212;">
+                                    Hủy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-</section>
 
+
+
+
+
+</section>
 
 <br>
 <br>
@@ -153,5 +190,27 @@ checkout.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JavaScript Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+</script>
+<script>
+    function submitForm() {
+        $('#confirmModal').modal('hide');
+        $('#myForm').submit();
+    }
+
+    function closedForm() {
+        $('#confirmModal').modal('hide');
+    }
+</script>
 </body>
 </html>

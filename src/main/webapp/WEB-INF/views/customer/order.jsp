@@ -32,21 +32,7 @@
     <link rel="stylesheet" href="<c:url value="/css/checkout.css"/>">
     <link rel="javascript" src="<c:url value="/js/checkout.js"/>">
 
-    <%--    <style>--%>
-    <%--        .modal {--%>
-    <%--            display: flex !important;--%>
-    <%--            align-items: center;--%>
-    <%--            justify-content: center;--%>
-    <%--        }--%>
 
-    <%--        .modal-dialog {--%>
-    <%--            margin: 0;--%>
-    <%--            position: relative;--%>
-    <%--            top: auto;--%>
-    <%--            left: auto;--%>
-    <%--            transform: none !important;--%>
-    <%--        }--%>
-    <%--    </style>--%>
 
 
 </head>
@@ -425,8 +411,6 @@
                             </div>
 
                             <div style="background: #4bb8a9; border: 2px solid #28a745;">
-
-
                                 <!-- Modal xác nhận -->
                                 <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog"
                                      aria-labelledby="confirmModalLabel" aria-hidden="true">
@@ -455,7 +439,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
 

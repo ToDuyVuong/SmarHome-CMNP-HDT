@@ -12,6 +12,16 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IProductService {
+    List<Product> findAllByStatus(int status);
+
+    Page<Product> findByNameContainingAndStatus(String keyword, int status, Pageable pageable);
+
+    Page<Product> findByCategoryCategoryIdAndStatus(int categoryId, int status, Pageable pageable);
+
+    List<Product> findByNameContainingAndStatus(String keyword, int status);
+
+    Page<Product> findAllByStatus(int status, Pageable pageable);
+
     List<Product> findAll();
 
     <S extends Product> List<S> findAll(Example<S> example);

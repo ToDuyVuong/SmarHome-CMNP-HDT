@@ -1,8 +1,11 @@
 package vn.smarthome_cnpm_hdt.controller.customer;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -12,11 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import vn.smarthome_cnpm_hdt.entity.Category;
 import vn.smarthome_cnpm_hdt.entity.Product;
+import vn.smarthome_cnpm_hdt.model.ProductModel;
 import vn.smarthome_cnpm_hdt.service.ICategoryService;
 import vn.smarthome_cnpm_hdt.service.IProductService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping("/product")
@@ -27,38 +33,29 @@ public class ProductController {
     @Autowired
     ICategoryService categoryService;
 
-//    @RequestMapping("")
-//    public String product(ModelMap model, HttpServletRequest request){
-//
-//        List<Product> products = productService.findAll();
-//        model.addAttribute("products", products);
-//
-//        return "customer/product";
-//    }
 
-//    @GetMapping("/products")
-//    public String viewProductsPage(Model model,
-//                                   @RequestParam(name = "page", defaultValue = "1") int pageNumber) {
-//        int pageSize = 6;
-//
-//        Page<Product> page = productService.findPaginated(pageNumber, pageSize);
-//        List<Product> products = page.getContent();
-//        model.addAttribute("currentPage", pageNumber);
-//        model.addAttribute("totalPages", page.getTotalPages());
-//        model.addAttribute("products", products);
-//        return "jsp-test";
-//    }
 
     @GetMapping("")
     public String products(Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int pageNumber) {
-        Page<Product> page = productService.findAll(PageRequest.of(pageNumber - 1, 6));
-        List<Category> categorys  = categoryService.findAll();
 
-        model.addAttribute("categories", categorys);
-        model.addAttribute("currentPage", pageNumber);
-        model.addAttribute("totalPages", page.getTotalPages());
-        model.addAttribute("products", page.getContent());
-        return "customer/product";
+       try {
+           Page<Product> page = productService.findAllByStatus(1, PageRequest.of(pageNumber - 1, 6));
+           List<Category> categorys  = categoryService.findAll();
+           model.addAttribute("categories", categorys);
+           model.addAttribute("currentPage", pageNumber);
+           model.addAttribute("totalPages", page.getTotalPages());
+           model.addAttribute("products", page.getContent());
+           return "customer/product";
+       }catch (Exception e){
+           System.out.println(e);
+           Page<Product> page = productService.findAll( PageRequest.of(pageNumber - 1, 6));
+           List<Category> categorys  = categoryService.findAll();
+           model.addAttribute("categories", categorys);
+           model.addAttribute("currentPage", pageNumber);
+           model.addAttribute("totalPages", page.getTotalPages());
+           model.addAttribute("products", page.getContent());
+           return "customer/product";
+       }
     }
 
 
@@ -70,46 +67,59 @@ public class ProductController {
     public String productDetail(ModelMap model, @PathVariable("productId") Integer productId,
                                 HttpServletRequest request){
 
-        System.out.println("aaaa="+ productId);
-//
-        Product product = productService.findById(productId).get();
-//
-        model.addAttribute("product", product);
-
-
-        return "customer/productdetail";
+        try {
+            System.out.println("aaaa="+ productId);
+            Product product = productService.findById(productId).get();
+            if (product.getStatus()==0){
+                ProductModel productModel = new ProductModel();
+                BeanUtils.copyProperties(product, productModel);
+                productModel.setQuantity(0);
+                model.addAttribute("product", productModel);
+                return "customer/productdetail";            }
+            model.addAttribute("product", product);
+            return "customer/productdetail";
+        }catch (Exception e){
+            return "index";
+        }
     }
 
     @RequestMapping("/list")
     public String productList(ModelMap model, HttpServletRequest request){
 
-        List<Product> products = productService.findAll();
-        model.addAttribute("products", products);
+     try {
+         List<Product> products = productService.findAllByStatus(1);
+         model.addAttribute("products", products);
+         return "customer/productlist";
+     }catch (Exception e){
+         System.out.println(e);
+         List<Product> products = productService.findAll();
+         model.addAttribute("products", products);
+         return "customer/productlist";
+     }
 
-        return "customer/productlist";
     }
 
-//    @RequestMapping("/search/{txt}")
-//    public String productCart(ModelMap model, @PathVariable("txt") String txt,  HttpServletRequest request){
-//
-//        System.out.println("aaaa="+ txt);
-//
-//        return "customer/searchproduct";
-//    }
+
 
     @GetMapping(path = "/search")
-    public String searchProduct(@RequestParam("keyword") String keyword, Model model) {
-        List<Product> searchResult = productService.findByNameContaining(keyword);
-        model.addAttribute("products", searchResult);
+    public String searchProduct(@RequestParam("keyword") String keyword, Model model, @RequestParam(value = "page", required = false, defaultValue = "1") int pageNumber) {
 
-
-        List<Category> categorys  = categoryService.findAll();
-
-        model.addAttribute("categories", categorys);
-
-
-
-        return "/customer/product";
+       try {
+           int pageSize = 6;
+           Page<Product> page = productService.findByNameContainingAndStatus(keyword, 1, PageRequest.of(pageNumber - 1, pageSize));
+           model.addAttribute("products", page);
+           List<Category> categorys  = categoryService.findAll();
+           model.addAttribute("categories", categorys);
+           model.addAttribute("currentPage", pageNumber);
+           model.addAttribute("totalPages", page.getTotalPages());
+           model.addAttribute("products", page.getContent());
+           model.addAttribute("keywordSearch", keyword);
+           return "/customer/product";
+       }
+       catch (Exception e){
+           System.out.println(e);
+           return "index";
+       }
     }
 
 }

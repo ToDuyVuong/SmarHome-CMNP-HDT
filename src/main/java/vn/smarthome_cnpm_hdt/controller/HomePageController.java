@@ -22,7 +22,7 @@ public class HomePageController {
     public String startHonmeIndex(ModelMap model) {
 
 
-        List<Product> products = productService.findAll();
+        List<Product> products = productService.findAllByStatus(1);
 
         int numProducts = products.size();
         List<Product> lastFourProducts = new ArrayList<>();
@@ -34,17 +34,19 @@ public class HomePageController {
             }
         }
 
-// Sử dụng stream để sắp xếp theo quantity và lọc ra các sản phẩm có quantity > 0
+// Sử dụng stream để sắp xếp theo quantity và lọc ra các sản phẩm có quantity > 0 và status = 1
         List<Product> filteredProducts = products.stream()
-                .filter(p -> p.getQuantity() > 0)
+                .filter(p -> p.getQuantity() > 0 && p.getStatus() == 1)
                 .sorted(Comparator.comparing(Product::getQuantity))
                 .limit(4)
                 .collect(Collectors.toList());
 
+// Lấy sản phẩm đầu tiên trong danh sách sản phẩm có quantity > 0 và status = 1
         Product filteredProduct = products.stream()
-                .filter(p -> p.getQuantity() > 0)
+                .filter(p -> p.getQuantity() > 0 && p.getStatus() == 1)
                 .sorted(Comparator.comparing(Product::getQuantity))
-                .findFirst().get();
+                .findFirst()
+                .orElse(null);
 
 
         model.addAttribute("topproducts", filteredProducts);

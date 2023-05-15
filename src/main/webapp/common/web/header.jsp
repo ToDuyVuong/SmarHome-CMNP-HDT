@@ -76,7 +76,7 @@
 
             <form method="GET" action="/product/search/${txt}" class="form-inline my-2 my-lg-0">
                 <div class="input-group input-group-sm">
-                    <input type="text" id="txt" value="" class="form-control"
+                    <input type="text" id="txt" value="${keywordSearch}" class="form-control"
                            placeholder="Tìm Kiếm" name="keyword"/>
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-secondary btn-number">

@@ -1,5 +1,7 @@
 package vn.smarthome_cnpm_hdt.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -30,4 +32,13 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
     @Modifying
     @Query("UPDATE Product p SET p.quantity = 0 WHERE p.productId = :id")
     void updateProductQuantityToZeroById(@Param("id") int id);
+
+    List<Product> findAllByStatus(int status);
+
+    Page<Product> findAllByStatus(int status, Pageable pageable);
+
+    List<Product> findByNameContainingAndStatus(String keyword, int status);
+    Page<Product> findByCategoryCategoryIdAndStatus(int categoryId, int status, Pageable pageable);
+    Page<Product> findByNameContainingAndStatus(String keyword, int status, Pageable pageable);
+
 }

@@ -120,6 +120,7 @@ public class CheckoutController {
 
             Product product = cartItem.getProducts();
             product.setQuantity(product.getQuantity() - cartItem.getQuantity());
+            product.setSold(product.getSold() + cartItem.getQuantity());
             productService.save(product);
 
             cartItemService.delete(cartItem);

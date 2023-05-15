@@ -42,6 +42,35 @@ public class OrderController {
     @Autowired
     IOrderItemService orderItemService;
 
+    @RequestMapping("/test")
+    public String test(){
+        return "test/progressbarorder";
+    }
+
+    @RequestMapping("/canceled/{orderId}")
+    public String canceled(@PathVariable("orderId") Integer orderId, ModelMap model){
+        Optional<Order> opt = orderService.findById(orderId);
+        if(opt.isPresent()){
+            Order order = opt.get();
+            order.setStatus(Order.Status.CANCELED);
+            orderService.saveOrUpdate(order);
+            List<OrderItem> orderItemList = orderItemService.listOrderItemsByOrderId(orderId);
+            for(OrderItem orderItem : orderItemList){
+                Product product = orderItem.getProduct();
+                product.setQuantity(product.getQuantity() + orderItem.getQuantity());
+                product.setSold(product.getSold() - orderItem.getQuantity());
+                if (product.getQuantity() < 0)
+                    product.setQuantity(0);
+                if (product.getSold() < 0)
+                    product.setSold(0);
+                productService.save(product);
+            }
+            model.addAttribute("orderId", orderId);
+        }
+
+        return "redirect:/order/detail/{orderId}";
+    }
+
     @RequestMapping("")
     public ModelAndView newOrder(ModelMap model, HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -149,71 +178,6 @@ public class OrderController {
 
 
 
-//    @RequestMapping("")
-//    public ModelAndView newOrder(ModelMap model, HttpServletRequest request) {
-//        HttpSession session = request.getSession();
-//        Integer id = (Integer) session.getAttribute("id");
-//        List<CartItem> cartItemList = cartItemService.findAll();
-//        List<CartItem> listCartItemSelecteds = new ArrayList<>();
-//        Integer quantity = 0;
-//        long total = 0;
-//        for (CartItem cartItem : cartItemList) {
-//            // Nếu checkbox được chọn thì thêm vào list thanh toán
-//            String selected = request.getParameter(String.valueOf(cartItem.getCartItemId()));
-//            if (selected != null) {
-//
-//                if(cartItem.getQuantity() > cartItem.getProducts().getQuantity()){
-//                   cartItem.setQuantity(cartItem.getProducts().getQuantity());
-//                }
-//
-//                listCartItemSelecteds.add(cartItem);
-//                quantity += cartItem.getQuantity();
-//                total += cartItem.getQuantity() * cartItem.getProducts().getPrice();
-//            }
-//        }
-//        model.addAttribute("quantity", quantity);
-//        model.addAttribute("total", total);
-//        // Nếu chưa check sản phẩm nào cả.
-//        if (listCartItemSelecteds.size() == 0) {
-//            // Có thể dùng session để lưu thông báo thay vì code tải lại trang toàn bộ.
-//            if (id == null) {
-//                // Nếu chưa đăng nhập thì chuyển hướng đến trang đăng nhập
-//                return new ModelAndView("redirect:/login");
-//            }
-//            List<CartItem> cartItemEntities = cartItemService.getCartItemsByCartId(id);
-//            Optional<Cart> opt = cartService.findById(id);
-//            if (opt.isPresent()) {
-//                CartModel cart = new CartModel();
-//                BeanUtils.copyProperties(opt.get(), cart);
-//                model.addAttribute("cart", cart);
-//            } else {
-//                return new ModelAndView("customer/cart", model);
-//            }
-//            if (cartItemEntities != null) {
-//                List<CartItemModel> cartItemModels = new ArrayList<>();
-//                for (CartItem cartItemEntity : cartItemEntities) {
-//                    CartItemModel cartItem = new CartItemModel();
-//                    BeanUtils.copyProperties(cartItemEntity, cartItem);
-//                    cartItemModels.add(cartItem);
-//                }
-//                model.addAttribute("cartItems", cartItemModels);
-//                model.addAttribute("messageCart", "Vui lòng chọn sản phẩm để thanh toán");
-//            }
-//            return new ModelAndView("customer/cart", model);
-//        }
-//        Optional<Customer> opt = customerService.findById(id);
-//        if (opt.isPresent()) {
-//            Customer entity = opt.get();
-//            CustomerModel customerModel = new CustomerModel();
-//            BeanUtils.copyProperties(entity, customerModel);
-//            model.addAttribute("customer", customerModel);
-//        }
-//        // Danh sách sản phẩm được chọn thanh toán.
-//        model.addAttribute("cartItemOrder", listCartItemSelecteds);
-//
-//        return new ModelAndView("customer/order", model);
-//
-//    }
 
 
     @RequestMapping("/view")

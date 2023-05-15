@@ -84,7 +84,7 @@
                         <div class="col">
                             <h1 class="text-center"><b
                                     style="font-family: Arial, sans-serif; font-weight: bold; font-size: 44px; color: #51d070;">
-                               Cảm Ơn Bạn Đã Đặt Hàng</b></h1>
+                                Cảm Ơn Bạn Đã Đặt Hàng</b></h1>
 
                         </div>
                     </div>
@@ -151,8 +151,6 @@
                                     </div>
 
 
-
-
                                     <div cclass="col-5">
                                         <div>
 
@@ -164,19 +162,17 @@
                                             </div>
 
 
-                                                <div class="form-group row justify-content-between">
-                                                    <label  class="col-auto col-form-label">
-                                                        <b>Hình thức vận chuyển:</b> ${shippingmethod}</label>
+                                            <div class="form-group row justify-content-between">
+                                                <label class="col-auto col-form-label">
+                                                    <b>Hình thức vận chuyển:</b> ${shippingmethod}</label>
 
-                                                </div>
-
+                                            </div>
 
 
                                             <br>
 
                                         </div>
                                     </div>
-
 
 
                                 </div>
@@ -211,13 +207,12 @@
                                                     <div class="media flex-column flex-sm-row">
 
 
-
-<%--                                                        <img class=" img-fluid" src="https://i.imgur.com/6oHix28.jpg"--%>
-<%--                                                             width="62"--%>
-<%--                                                             height="62">--%>
+                                                            <%--                                                        <img class=" img-fluid" src="https://i.imgur.com/6oHix28.jpg"--%>
+                                                            <%--                                                             width="62"--%>
+                                                            <%--                                                             height="62">--%>
 
                                                         <img src="${item.products.image}"
-                                                             alt="Hình ảnh sản phẩm"title="" width="150"
+                                                             alt="Hình ảnh sản phẩm" title="" width="150"
                                                              height="150">
 
 
@@ -268,7 +263,8 @@
                                                         <div class="col-4"><p class="mb-1 tex"><b>Thuế VAT 10%:</b></p>
                                                         </div>
                                                         <div class="flex-sm-col col-auto"><p class="mb-1">
-                                                            <b>${Math.floor((totalPrice - shippingcost) * 0.1)} VNĐ</b></p></div>
+                                                            <b>${Math.floor((totalPrice - shippingcost) * 0.1)} VNĐ</b>
+                                                        </p></div>
                                                     </div>
                                                     <div class="row justify-content-between">
                                                         <div class="col-4"><p class="mb-1 text-danger"><b>Khuyển
@@ -277,10 +273,11 @@
                                                         </div>
                                                         <div class="flex-sm-col col-auto"><p class="mb-1 text-danger">
                                                             <b>
-                                                                - ${Math.floor((totalPrice - shippingcost) * 0.1)} VNĐ</b></p></div>
+                                                                - ${Math.floor((totalPrice - shippingcost) * 0.1)}
+                                                                VNĐ</b></p></div>
                                                     </div>
                                                     <div class="row justify-content-between">
-                                                        <div class="col"><p class="mb-1"><b>Phí vận chuyển:</b> </p>
+                                                        <div class="col"><p class="mb-1"><b>Phí vận chuyển:</b></p>
                                                         </div>
                                                         <div class="flex-sm-col col-auto"><b><p
                                                                 class="mb-1 shipping-fee-2"
@@ -348,12 +345,10 @@
                                                 </div>
 
                                                 <a href="/">
-                                                <button  type="submit" class="btn btn-primary btn-lg btn-block">
+                                                    <button type="submit" class="btn btn-primary btn-lg btn-block">
                                                         Tiếp tục mua hàng
                                                     </button>
                                                 </a>
-
-
 
 
                                             </div>
@@ -376,51 +371,6 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-<%--<input type="hidden" id="total-value" name="total" value="">--%>
-<%--<script>--%>
-<%--    let totalPriceElem = document.getElementById('total-price');--%>
-<%--    let shippingMethodElem = document.getElementById('shipping-method');--%>
-<%--    let shippingFeeElem = document.getElementById('shipping-fee');--%>
-<%--    let shippingFeeElem2 = document.getElementById('shipping-fee-2');--%>
-<%--    let totalValueElem = document.getElementById('total-value');--%>
-<%--    let totalOrder = parseInt(document.getElementById("total-order").textContent);--%>
-<%--    let basicShippingFee = 0;--%>
-<%--    let fastShippingFee = 30000;--%>
-<%--    let expressShippingFee = 60000;--%>
-
-<%--    function updateTotalPrice() {--%>
-<%--        let shippingFee = basicShippingFee;--%>
-<%--        if (shippingMethodElem.value === 'fast') {--%>
-<%--            shippingFee = fastShippingFee;--%>
-<%--        } else if (shippingMethodElem.value === 'express') {--%>
-<%--            shippingFee = expressShippingFee;--%>
-<%--        }--%>
-<%--        // Cập nhật phí vận chuyển vào HTML--%>
-
-<%--        if (totalOrder > 100000) {--%>
-<%--            shippingFee = 0;--%>
-<%--        }--%>
-<%--        let total = parseInt(totalOrder) + parseInt(shippingFee);--%>
-<%--        totalPriceElem.innerHTML = total;--%>
-<%--        totalValueElem.value = total;--%>
-
-<%--        shippingFeeElem.innerHTML = shippingFee + ` VNĐ`;--%>
-<%--        shippingFeeElem2.innerHTML = shippingFee + ` VNĐ`;--%>
-
-
-<%--    }--%>
-
-<%--    shippingMethodElem.addEventListener('change', updateTotalPrice);--%>
-
-
-<%--    shippingFeeElem.innerHTML = basicShippingFee + ` VNĐ`;--%>
-
-<%--    updateTotalPrice();--%>
-
-
-<%--</script>--%>
 
 
 </body>

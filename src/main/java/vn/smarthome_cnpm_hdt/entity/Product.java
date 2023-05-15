@@ -36,6 +36,12 @@ public class Product {
     @Column(name = "quantity")
     private int quantity;
 
+    @Column(name = "status", columnDefinition = "int default 1")
+    private int status;
+
+    @Column(name = "sold", columnDefinition = "int default 0")
+    private int sold;
+
     // relationship with Category
     @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id", nullable = false, foreignKey = @ForeignKey(name = "FK_category_product"))

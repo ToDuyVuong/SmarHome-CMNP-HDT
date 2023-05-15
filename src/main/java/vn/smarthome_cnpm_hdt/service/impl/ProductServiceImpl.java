@@ -21,6 +21,32 @@ public class ProductServiceImpl implements IProductService {
         this.productRepository = productRepository;
     }
 
+
+    @Override
+    public List<Product> findAllByStatus(int status) {
+        return productRepository.findAllByStatus(status);
+    }
+
+    @Override
+    public Page<Product> findByNameContainingAndStatus(String keyword, int status, Pageable pageable) {
+        return productRepository.findByNameContainingAndStatus(keyword, status, pageable);
+    }
+
+    @Override
+    public Page<Product> findByCategoryCategoryIdAndStatus(int categoryId, int status, Pageable pageable) {
+        return productRepository.findByCategoryCategoryIdAndStatus(categoryId, status, pageable);
+    }
+
+    @Override
+    public List<Product> findByNameContainingAndStatus(String keyword, int status) {
+        return productRepository.findByNameContainingAndStatus(keyword, status);
+    }
+
+    @Override
+    public Page<Product> findAllByStatus(int status, Pageable pageable) {
+        return productRepository.findAllByStatus(status, pageable);
+    }
+
     @Override
     public List<Product> findAll() {
         return productRepository.findAll();
