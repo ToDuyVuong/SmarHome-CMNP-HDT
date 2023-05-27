@@ -48,6 +48,49 @@
             </div>
         </div>
     </div>
+
+<%--    <div>--%>
+<%--        <div class="card bg-light mb-3">--%>
+<%--            <div class="card-header bg-primary text-white">--%>
+<%--                <i class="fa fa-filter"></i> Lọc theo giá--%>
+<%--            </div>--%>
+<%--            <div class="card-body">--%>
+<%--                <form action="${pageContext.request.contextPath}/product/quantity" method="get">--%>
+<%--                    <div class="form-group">--%>
+<%--                        <label for="priceFrom">Từ:</label>--%>
+<%--                        <input type="text" class="form-control" id="priceFrom" name="priceFrom">--%>
+<%--                    </div>--%>
+<%--                    <div class="form-group">--%>
+<%--                        <label for="priceTo">Đến:</label>--%>
+<%--                        <input type="text" class="form-control" id="priceTo" name="priceTo">--%>
+<%--                    </div>--%>
+<%--                    <button type="submit" class="btn btn-primary">Lọc</button>--%>
+<%--                </form>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+
+<%--        <c:forEach items="${productsa}" var="product">--%>
+<%--            <c:set var="productPrice" value="${product.price}" scope="page" />--%>
+<%--            <c:if test="${empty param.priceFrom || productPrice >= param.priceFrom}">--%>
+<%--                <c:if test="${empty param.priceTo || productPrice <= param.priceTo}">--%>
+<%--                    <!-- Product HTML code goes here -->--%>
+<%--                </c:if>--%>
+<%--            </c:if>--%>
+<%--        </c:forEach>--%>
+
+<%--        <ul class="pagination">--%>
+<%--            <c:forEach begin="1" end="${totalPages}" var="page">--%>
+<%--                <li class="page-item ${currentPage == page ? 'active' : ''}">--%>
+<%--                    <a class="page-link" href="?page=${page}&priceFrom=${param.priceFrom}&priceTo=${param.priceTo}">--%>
+<%--                            ${page}--%>
+<%--                    </a>--%>
+<%--                </li>--%>
+<%--            </c:forEach>--%>
+<%--        </ul>--%>
+<%--    </div>--%>
+
+
+
     <div class="container">
         <div class="row">
             <div class="col-12 col-sm-3">

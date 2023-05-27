@@ -8,10 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import vn.smarthome_cnpm_hdt.entity.Product;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
 public interface IProductService {
+    List<Product> getProductsByPriceRange(Integer priceFrom, Integer priceTo);
+
     List<Product> findAllByStatus(int status);
 
     Page<Product> findByNameContainingAndStatus(String keyword, int status, Pageable pageable);

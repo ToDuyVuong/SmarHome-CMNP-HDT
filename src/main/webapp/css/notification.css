@@ -1,0 +1,14 @@
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #fff;
+    z-index: 9999;
+}
+
+.success {
+    background-color: #28a745;
+}

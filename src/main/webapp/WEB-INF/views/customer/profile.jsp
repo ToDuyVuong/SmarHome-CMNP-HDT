@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>Trang cá nhân</title>
 
-<%--    <%@include file="/common/taglib.jsp" %>--%>
+    <%--    <%@include file="/common/taglib.jsp" %>--%>
 
 
     <link
@@ -25,12 +25,21 @@
     <script
             src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js@1.11.2/dist/toastify.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js@1.11.2/dist/toastify.min.css"/>
+
+    <!-- Thêm các thư viện CSS và JavaScript cần thiết -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 <body>
 <%--<%@include file="/common/web/header.jsp" %>--%>
 <br><br><br><br><br>
 <h1 class="text-center"><b style="font-family: Arial, sans-serif; font-weight: bold; font-size: 44px; color: #51d070;">
-    Thông Tin Cá Nhân</b> </h1>
+    Thông Tin Cá Nhân</b></h1>
 <br><br>
 <section style="background-color: #eee;">
     <div class="container py-5">
@@ -77,7 +86,7 @@
 
 
                             <a href="<c:url value="/order/view"/>"
-                                    class="btn btn-success"><i class="fas fas-bars"></i>Đơn mua</a>
+                               class="btn btn-success"><i class="fas fas-bars"></i>Đơn mua</a>
                         </div>
                     </div>
                 </div>
@@ -176,14 +185,48 @@
                     <div>
                         <a class="btn btn-success" href="/cart" role="button"><span class="fa">&#xf07a;</span> Giỏ hàng</a>
                     </div>
+                    <%--                    <div>--%>
+                    <%--                        <a class="btn btn-danger" href="/logout" role="button"><span class="fas fa-sign-out-alt"></span> Đăng xuất </a>--%>
+                    <%--                    </div>--%>
+
                     <div>
-                        <a class="btn btn-danger" href="/logout" role="button"><span class="fas fa-sign-out-alt"></span> Đăng xuất </a>
+                        <a class="btn btn-danger" href="#" role="button" onclick="confirmLogout()"><span class="fas fa-sign-out-alt"></span> Đăng xuất</a>
                     </div>
 
+                    <!-- Modal xác nhận -->
+                    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="logoutModalLabel">Xác nhận đăng xuất</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Bạn có chắc chắn muốn đăng xuất không?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                    <a href="/logout" class="btn btn-danger" onclick="logoutSuccess()">Đăng xuất</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        function confirmLogout() {
+                            $('#logoutModal').modal('show');
+                        }
+
+                        function logoutSuccess() {
+                            // Hiển thị thông báo sau khi đăng xuất thành công
+                            toastr.success('Đăng xuất thành công');
+                        }
+                    </script>
+
+
                 </div>
-
-
-
 
 
             </div>
@@ -191,9 +234,85 @@
     </div>
 </section>
 
+<script>
+    function confirmLogout() {
+        $('#logoutModal').modal('show');
+    }
+
+    $(document).ready(function() {
+        var logoutNotification = localStorage.getItem('logoutNotification');
+        if (logoutNotification) {
+            showToast(logoutNotification);
+            localStorage.removeItem('logoutNotification');
+        }
+    });
+
+    function showToast(message) {
+        var toast = $('<div class="toast" role="alert" aria-live="assertive" aria-atomic="true"><div class="toast-body">' + message + '</div></div>');
+        $('.toast-container').append(toast);
+        toast.toast({ delay: 5000 }).toast('show');
+    }
+</script>
+
+<%--<script>--%>
+<%--    function confirmLogout() {--%>
+<%--        $('#logoutModal').modal('show');--%>
+<%--    }--%>
+
+<%--    function logoutSuccess() {--%>
+<%--        // Thực hiện các xử lý khi đăng xuất thành công--%>
+<%--        // Hiển thị thông báo ở góc phải màn hình--%>
+<%--        showNotification('Đăng xuất thành công', 'success');--%>
+<%--    }--%>
+
+<%--    function showNotification(message, type) {--%>
+<%--        // Tạo một phần tử div cho thông báo--%>
+<%--        var notification = document.createElement('div');--%>
+<%--        notification.classList.add('notification');--%>
+<%--        notification.classList.add(type);--%>
+<%--        notification.innerHTML = message;--%>
+
+<%--        // Thêm thông báo vào body của trang--%>
+<%--        document.body.appendChild(notification);--%>
+
+<%--        // Sau 5 giây, loại bỏ thông báo--%>
+<%--        setTimeout(function() {--%>
+<%--            notification.remove();--%>
+<%--        }, 5000);--%>
+<%--    }--%>
+<%--</script>--%>
+
+<%--<style>--%>
+<%--    .notification {--%>
+<%--        position: fixed;--%>
+<%--        top: 20px;--%>
+<%--        right: 20px;--%>
+<%--        padding: 10px 20px;--%>
+<%--        border-radius: 5px;--%>
+<%--        font-weight: bold;--%>
+<%--        color: #fff;--%>
+<%--        z-index: 9999;--%>
+<%--    }--%>
+
+<%--    .success {--%>
+<%--        background-color: #28a745;--%>
+<%--    }--%>
+<%--</style>--%>
 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JavaScript Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+</script>
 </body>
-<%--<%@include file="/common/web/footer.jsp" %>--%>
+
 
 </html>

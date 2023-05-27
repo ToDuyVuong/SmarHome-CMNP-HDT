@@ -28,4 +28,5 @@ public class CustomerModel {
     private Cart cart;
     private String newpassword;
     private String password2;
+    private int newAccount;
 }

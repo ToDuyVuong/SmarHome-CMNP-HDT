@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.smarthome_cnpm_hdt.entity.Customer;
 import vn.smarthome_cnpm_hdt.model.CustomerModel;
 import vn.smarthome_cnpm_hdt.service.ICustomerService;
@@ -33,7 +34,17 @@ public class LoginController {
         // Get the current URL
         String currentUrl = request.getRequestURI();
         System.out.println("currentUrl = " + currentUrl);
-
+        try {
+            CustomerModel customer = (CustomerModel) model.getAttribute("customer");
+            if (customer.getNewAccount()==1) {
+                model.addAttribute("message", "Bạn đã đăng ký thành công. Hãy nhập tài khoản và mật khẩu để đăng nhập.");
+            }
+            customer.setNewAccount(2);
+            model.addAttribute("customer", customer);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
         return "customer/login";
     }
 
@@ -41,7 +52,7 @@ public class LoginController {
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String Login(ModelMap model, HttpSession session, @Valid @ModelAttribute("us") CustomerModel us,
                         BindingResult result, HttpServletRequest request, @RequestParam("username") String userName,
-                        @RequestParam("password") String passWord, HttpServletRequest req) {
+                        @RequestParam("password") String passWord, RedirectAttributes redirectAttributes) {
 
         // xử lý yêu cầu đăng nhập tại đây
 
@@ -49,8 +60,8 @@ public class LoginController {
         String password = request.getParameter("password");
 
             try {
-                Customer Customer = customerService.findByUsername(username);
-
+                Customer customer = customerService.findByUsername(username);
+                redirectAttributes.addFlashAttribute("customer", customer);
                 if (result.hasErrors()) {
                     model.addAttribute("message", result.getAllErrors().toString());
                     return "index";
@@ -64,21 +75,21 @@ public class LoginController {
                 } else if (passWord == "") {
                     model.addAttribute("message", "Chưa nhập mật khẩu!");
                     return "customer/login";
-                } else if (Customer == null) {
+                } else if (customer == null) {
                     model.addAttribute("message", "Tài khoản không tồn tại!");
                     return "customer/login";
-                } else if (password.equals(Customer.getPassword())) {
-                    model.addAttribute("message", "Xin chào, đây là trang của tôi!co user" + Customer.getFullname());
+                } else if (password.equals(customer.getPassword())) {
+                    model.addAttribute("message", "Xin chào, đây là trang của tôi!co user" + customer.getFullname());
 
-                    session.setAttribute("id", Customer.getCustomerId());
-                    session.setAttribute("fullname", Customer.getFullname());
+                    session.setAttribute("id", customer.getCustomerId());
+                    session.setAttribute("fullname", customer.getFullname());
 
                     // nếu sử dụng redirect thì sẻ ko lấy đc biến message.
                     // redirect sẻ trả về đường link map.
                     return "redirect:/"; // = return "index";
                 } else {
 
-                    System.out.println("Sai PassWord nhap-" + passWord + "-user-" + Customer.getPassword().toString() + "-");
+                    System.out.println("Sai PassWord nhap-" + passWord + "-user-" + customer.getPassword().toString() + "-");
                     model.addAttribute("message", "Sai mật khẩu!");
                     return "customer/login";
                 }

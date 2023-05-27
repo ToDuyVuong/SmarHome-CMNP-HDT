@@ -1,4 +1,5 @@
-checkout.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
+checkout.jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="/common/taglib.jsp" %>
 <!DOCTYPE html>
@@ -10,6 +11,9 @@ checkout.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
     <title>Chi tiết đơn hàng</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Bao gồm Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 
     <link rel="stylesheet" href="<c:url value="/css/dataleorderitem.css"/>">
 
@@ -56,10 +60,9 @@ checkout.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
                                                      height="150">
                                             </div>
                                             <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                                <p class="text-muted mb-0"  title="${product.name}">${item.product.name}</p>
+                                                <p class="text-muted mb-0"
+                                                   title="${product.name}">${item.product.name}</p>
                                             </div>
-
-
 
 
                                             <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
@@ -108,7 +111,8 @@ checkout.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
                         <div class="d-flex justify-content-between">
                             <p class="text-muted mb-0">Mã giảm giá: Không</p>
                             <p class="text-muted mb-0"><span
-                                    class="fw-bold me-4">Thuế VAT 10%: </span> ${(order.totalPrice-shippingcost) * 0.1}</p>
+                                    class="fw-bold me-4">Thuế VAT 10%: </span> ${(order.totalPrice-shippingcost) * 0.1}
+                            </p>
                         </div>
 
                         <div class="d-flex justify-content-between mb-5">
@@ -121,7 +125,8 @@ checkout.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
 
                         <div class="d-flex justify-content-between total-price">
                             <p class="text-muted mb-0" style="color: black">Tổng tiền hàng:</p>
-                            <p class="text-muted mb-0"><span class="fw-bold me-4">${order.totalPrice - shippingcost} VNĐ</span></p>
+                            <p class="text-muted mb-0"><span
+                                    class="fw-bold me-4">${order.totalPrice - shippingcost} VNĐ</span></p>
                         </div>
                     </div>
                     <div class="card-footer border-0 px-4 py-5"
@@ -134,9 +139,8 @@ checkout.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
 
                 <div class="card-footer text-center">
                     <c:if test="${order.status == 'PENDING'}">
-                        <a href="/order/canceled/${order.orderId}">
-                            <button class="btn btn-danger">Hủy đơn hàng</button>
-                        </a>
+                        <button class="btn btn-danger" onclick="showCancelOrderModal(${order.orderId})">Hủy đơn hàng
+                        </button>
                     </c:if>
                 </div>
 
@@ -147,37 +151,34 @@ checkout.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
             </div>
 
             <div style="background: #4bb8a9">
+
                 <!-- Modal xác nhận -->
-                <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal fade" id="cancelOrderModal" tabindex="-1" role="dialog"
+                     aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="confirmModalLabel">Xác nhận hủy đơn hàng của bạn!</h5>
-                                <button type="button" class="close" onclick="closedForm();" aria-label="Close">
+                                <h5 class="modal-title" id="cancelOrderModalLabel">Xác nhận hủy đơn hàng</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                Bạn có chắc chắn muốn hủy đơn hàng này không?
+                                <p>Bạn có chắc chắn muốn hủy đơn hàng không?</p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" onclick="closedForm();">
-                                    Đóng
-                                </button>
-                                <button type="button" class="btn btn-primary" onclick="submitForm();" style="font-family: Arial, sans-serif; font-weight: bold; background-color: #c51212;">
-                                    Hủy
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                                <button type="button" class="btn btn-danger" onclick="cancelOrder()">Hủy đơn hàng
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
         </div>
     </div>
-
-
-
 
 
 </section>
@@ -186,6 +187,11 @@ checkout.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
 <br>
 <br>
 
+<!-- Bao gồm jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Bao gồm thư viện JavaScript của Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -203,13 +209,15 @@ checkout.jsp<%@ page language="java" contentType="text/html; charset=UTF-8"
         integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
 </script>
 <script>
-    function submitForm() {
-        $('#confirmModal').modal('hide');
-        $('#myForm').submit();
+    let orderId;
+
+    function showCancelOrderModal(id) {
+        orderId = id;
+        $('#cancelOrderModal').modal('show');
     }
 
-    function closedForm() {
-        $('#confirmModal').modal('hide');
+    function cancelOrder() {
+        window.location.href = `/order/canceled/${orderId}`;
     }
 </script>
 </body>

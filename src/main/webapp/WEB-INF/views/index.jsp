@@ -40,7 +40,8 @@
                 <div class="carousel-inner">
                     <c:forEach items="${products}" var="product" varStatus="status">
                         <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
-                            <img src="${product.image}" alt="Hình ảnh sản phẩm" title="">
+                            <img class="d-block mx-auto" src="${product.image}" alt="Hình ảnh sản phẩm"
+                                 title="${product.name}">
                         </div>
                     </c:forEach>
                 </div>

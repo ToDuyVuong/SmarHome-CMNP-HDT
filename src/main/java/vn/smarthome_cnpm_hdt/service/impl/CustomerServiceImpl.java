@@ -21,6 +21,16 @@ public class CustomerServiceImpl implements ICustomerService {
     }
 
     @Override
+    public Customer findByEmail(String email) {
+        return customerRepository.findByEmail(email);
+    }
+
+    @Override
+    public Customer findByPhone(String phone) {
+        return customerRepository.findByPhone(phone);
+    }
+
+    @Override
     public List<Customer> findAll() {
         return customerRepository.findAll();
     }

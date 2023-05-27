@@ -20,6 +20,7 @@ import vn.smarthome_cnpm_hdt.service.ICategoryService;
 import vn.smarthome_cnpm_hdt.service.IProductService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
@@ -120,6 +121,24 @@ public class ProductController {
            System.out.println(e);
            return "index";
        }
+    }
+
+    @GetMapping("/quantity")
+    public String productList(@RequestParam(value = "priceFrom", required = false) String priceFrom,
+                              @RequestParam(value = "priceTo", required = false) String priceTo,
+                              Model model) {
+
+        Integer priceto = Integer.valueOf(priceTo);
+        Integer pricefrom = Integer.valueOf(priceFrom);
+        // Logic to fetch and filter products based on price
+        List<Product> filteredProducts = productService.getProductsByPriceRange(pricefrom, priceto);
+
+        // Add filtered products to the model
+        model.addAttribute("productsa", filteredProducts);
+
+        // Add other necessary model attributes
+
+        return "product-list";
     }
 
 }

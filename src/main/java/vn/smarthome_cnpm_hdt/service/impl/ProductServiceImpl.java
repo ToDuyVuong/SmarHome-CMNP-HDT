@@ -9,6 +9,7 @@ import vn.smarthome_cnpm_hdt.entity.Product;
 import vn.smarthome_cnpm_hdt.repository.ProductRepository;
 import vn.smarthome_cnpm_hdt.service.IProductService;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,10 @@ public class ProductServiceImpl implements IProductService {
         this.productRepository = productRepository;
     }
 
-
+    @Override
+    public List<Product> getProductsByPriceRange(Integer priceFrom, Integer priceTo) {
+        return productRepository.findByPriceBetween(priceFrom, priceTo);
+    }
     @Override
     public List<Product> findAllByStatus(int status) {
         return productRepository.findAllByStatus(status);

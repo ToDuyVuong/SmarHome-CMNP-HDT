@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import vn.smarthome_cnpm_hdt.entity.Product;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer>{
@@ -38,6 +39,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
     Page<Product> findAllByStatus(int status, Pageable pageable);
 
     List<Product> findByNameContainingAndStatus(String keyword, int status);
+
+    List<Product> findByPriceBetween(Integer priceFrom, Integer priceTo);
     Page<Product> findByCategoryCategoryIdAndStatus(int categoryId, int status, Pageable pageable);
     Page<Product> findByNameContainingAndStatus(String keyword, int status, Pageable pageable);
 

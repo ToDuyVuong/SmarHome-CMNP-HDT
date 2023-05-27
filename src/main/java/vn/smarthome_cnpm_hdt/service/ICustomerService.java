@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ICustomerService {
+    Customer findByEmail(String email);
+
+    Customer findByPhone(String phone);
+
     List<Customer> findAll();
 
     <S extends Customer> List<S> findAll(Example<S> example);

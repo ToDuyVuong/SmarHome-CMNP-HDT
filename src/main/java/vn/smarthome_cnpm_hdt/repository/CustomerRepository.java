@@ -7,6 +7,10 @@ import java.util.List;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer>{
 
+    Customer findByEmail (String email);
+
+    Customer findByPhone (String phone);
+
     Customer findByUsernameContaining(String username);
 
     List<Customer> findByFullnameContaining(String fullname);

@@ -47,14 +47,14 @@
                                 </div>
                             </c:if>
 
-                            <div>
-                                <c:if test="${not empty sessionScope.messageRegister}">
-                                    <div class="alert alert-primary" role="alert">
-                                        <i><%=session.getAttribute("messageRegister")%>
-                                        </i>
-                                    </div>
-                                </c:if>
-                            </div>
+<%--                            <div>--%>
+<%--                                <c:if test="${not empty sessionScope.messageRegister}">--%>
+<%--                                    <div class="alert alert-primary" role="alert">--%>
+<%--                                        <i><%=session.getAttribute("messageRegister")%>--%>
+<%--                                        </i>--%>
+<%--                                    </div>--%>
+<%--                                </c:if>--%>
+<%--                            </div>--%>
 
                             <div>
 
@@ -87,20 +87,44 @@
                                         class="form-control form-control-lg"/>
                                 </div>
 
-                                <div class="col-md-6 mb-4">
-                                    <label class="form-label" for="form3Example1cg">Giới
-                                        tính:</label><br>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="gender"
-                                               id="femaleGender" value="false" checked/> <label
-                                            class="form-check-label " for="femaleGender">Nữ</label>
+                                    <div class="col-md-6 mb-4">
+                                        <label class="form-label" for="form3Example1cg">Giới tính:</label><br>
+                                        <div class="form-check form-check-inline">
+                                            <c:if test="${customer.gender == false}">
+                                                <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="false" checked="checked" />
+                                            </c:if>
+                                            <c:if test="${customer.gender == true}">
+                                                <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="false" />
+                                            </c:if>
+                                            <label class="form-check-label" for="femaleGender">Nữ</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <c:if test="${customer.gender == true}">
+                                                <input class="form-check-input" type="radio" name="gender" id="maleGender" value="true" checked="checked" />
+                                            </c:if>
+                                            <c:if test="${customer.gender == false}">
+                                                <input class="form-check-input" type="radio" name="gender" id="maleGender" value="true" />
+                                            </c:if>
+                                            <label class="form-check-label" for="maleGender">Nam</label>
+                                        </div>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="gender"
-                                               id="maleGender" value="true"/> <label
-                                            class="form-check-label" for="maleGender">Nam</label>
-                                    </div>
-                                </div>
+
+<%--                                <div class="col-md-6 mb-4">--%>
+<%--                                    <label class="form-label" for="form3Example1cg">Giới--%>
+<%--                                        tính:</label><br>--%>
+<%--                                    <div class="form-check form-check-inline">--%>
+<%--                                        <input class="form-check-input" type="radio" name="gender"--%>
+<%--                                               id="femaleGender" value="false"--%>
+<%--                                               checked="${customer.gender == true}"/> <label--%>
+<%--                                            class="form-check-label " for="femaleGender">Nữ</label>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="form-check form-check-inline">--%>
+<%--                                        <input class="form-check-input" type="radio" name="gender"--%>
+<%--                                               id="maleGender" value="true"--%>
+<%--                                        checked="${customer.gender == false}"/> <label--%>
+<%--                                            class="form-check-label" for="maleGender">Nam</label>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="birthday">Ngày sinh:</label> <input

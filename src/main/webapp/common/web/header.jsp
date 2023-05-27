@@ -30,6 +30,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <style>
         .popover-body {
@@ -93,46 +94,39 @@
                 </button>
                 <div class="dropdown-menu" id="dropdownMenu">
 
-                    <ul>
-                        <c:if test="${not empty sessionScope.id}">
-                            <li style='font-size:21px'><a href="/profile" style='color: blue;'><i class='far' >&#xf2bd;</i> Cá nhân</a></li>
-                            <li style='font-size:21px'><a href="/cart" style='color: green;'><i class="fa" >&#xf07a;</i> Giỏ hàng</a></li>
-                            <li style='font-size:21px'><a href="/logout" style='color: red;'><i class="fas fa-sign-out-alt" ></i> Đăng xuất</a></li>
-                        </c:if>
-                        <c:if test="${empty sessionScope.id}">
-                            <li style='font-size:20px' ><a href="/login"  style='color: orange;'><i class="fas fa-sign-in-alt" ></i> Đăng nhập</a></li>
-                        </c:if>
-                    </ul>
-
 <%--                    <ul>--%>
 <%--                        <c:if test="${not empty sessionScope.id}">--%>
-<%--                            <li  style='font-size:21px'><a href="/profile"><i class='far'>&#xf2bd;</i> Cá nhân</a></li>--%>
-<%--                            <li style='font-size:21px'><a href="/cart"><i class="fa">&#xf07a;</i> Giỏ hàng</a></li>--%>
-<%--                            <li style='font-size:21px'><a href="/logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>--%>
-<%--                        </c:if>--%>
-<%--                        <c:if test="${empty sessionScope.id}">--%>
-<%--                            <li style='font-size:21px'><a href="/login"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>--%>
-<%--                        </c:if>--%>
-<%--                    </ul>--%>
-<%--                    <ul>--%>
-
-
-<%--                        <c:if test="${not empty sessionScope.id}">--%>
-<%--                            <li style='font-size:20px'><a href="/profile">--%>
-<%--                                <i class='far'>&#xf2bd;</i>--%>
-<%--                                Cá nhân</a></li>--%>
-<%--                            <li style='font-size:20px'><a href="/cart">--%>
-<%--                                <i class="fa">&#xf07a;</i>--%>
+<%--                            <li style='font-size:21px'><a href="/profile" style='color: black;'><i--%>
+<%--                                    class='far'>&#xf2bd;</i> Cá nhân</a></li>--%>
+<%--                            <li style='font-size:21px'><a href="/cart" style='color: green;'><i class="fa">&#xf07a;</i>--%>
 <%--                                Giỏ hàng</a></li>--%>
-<%--                            <li style='font-size:20px'><a href="/logout"><i class="fas fa-sign-out-alt"></i>--%>
-<%--                                Đăng xuất</a></li>--%>
+<%--                            <li style='font-size:21px'><a href="/order/view" style='color: #651FFF;'><i--%>
+<%--                                    class="bi bi-clipboard-data"></i> Đơn hàng</a></li>--%>
+<%--                            <li style='font-size:21px'><a href="/logout" style='color: red;'><i--%>
+<%--                                    class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>--%>
 
 <%--                        </c:if>--%>
 <%--                        <c:if test="${empty sessionScope.id}">--%>
-<%--                            <li style='font-size:20px'><a href="/login"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>--%>
-<%--                            </li>--%>
+<%--                            <li style='font-size:20px'><a href="/login" style='color: orange;'><i--%>
+<%--                                    class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>--%>
 <%--                        </c:if>--%>
 <%--                    </ul>--%>
+
+
+    <div>
+        <c:if test="${not empty sessionScope.id}">
+            <button type="button" class="btn btn-link" style="font-size: 21px; margin-left: 20px; color: black;  font-weight: bold;"><a href="/profile" style="color: black; text-decoration: none;"><i class="far fa-user"></i> Cá nhân</a></button>
+            <button type="button" class="btn btn-link" style="font-size: 21px; margin-left: 20px; color: green; font-weight: bold;"><a href="/cart" style="color: green; text-decoration: none;"><i class="fas fa-shopping-cart"></i> Giỏ hàng</a></button>
+            <button type="button" class="btn btn-link" style="font-size: 21px; margin-left: 20px; color: #651FFF;  font-weight: bold;"><a href="/order/view" style="color: #651FFF; text-decoration: none;"><i class="bi bi-clipboard-data"></i> Đơn hàng</a></button>
+            <button type="button" class="btn btn-link" style="font-size: 21px; margin-left: 20px; color: red;  font-weight: bold;"><a href="/logout" style="color: red; text-decoration: none;"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></button>
+        </c:if>
+        <c:if test="${empty sessionScope.id}">
+            <button type="button" class="btn btn-link" style="font-size: 20px; margin-left: 20px; color: orange; text-decoration: none; font-weight: bold;"><a href="/login" style="color: orange; "><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></button>
+        </c:if>
+    </div>
+
+
+
                 </div>
             </div>
 
